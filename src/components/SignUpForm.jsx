@@ -8,27 +8,26 @@ export default function SignUpForm({setToken}){
 
     // function for calling API when form data has been submitted.
     async function handleSubmit(e){
-        e.preventDefault();
-        
-        try {
-              const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup",  { 
-                method: "POST", 
-                headers: { 
-                  "Content-Type": "application/json" 
-                }, 
-                body: JSON.stringify({ 
-                  username: `${username}`, 
-                  password: `${password}`, 
-                })
-            })   
-            const result = await response.json();
-            console.log(result);
-            alert(`${result.message}`)
-            setToken(result.token)
+      e.preventDefault();
+
+      try {
+        const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup",  { 
+          method: "POST", 
+          headers: { 
+            "Content-Type": "application/json" 
+          }, 
+          body: JSON.stringify({ 
+            username: `${username}`, 
+            password: `${password}`, 
+            })
+        })   
+          const result = await response.json();
+          console.log(result);
+          alert(`${result.message}`)
+          setToken(result.token)
         }catch (error){
-            setError(error.message)
+          setError(error.message)
         }
-        
     }
 
     return (
@@ -41,13 +40,13 @@ export default function SignUpForm({setToken}){
         {/* When form is submitted, calls the handleSubmit function
             and passes it the values for username and password */}
         <form onSubmit={(handleSubmit)}>
-        <label>
+          <label>
             Username: <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <label>
+          </label>
+          <label>
             Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <button>Submit</button>
+          </label>
+          <button>Submit</button>
         </form>
       </>
     )
